@@ -1,0 +1,4 @@
+Rails Base API
+--------------
+
+* Base Application used for an API based on Rails 4.2.5
