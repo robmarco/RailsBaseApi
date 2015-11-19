@@ -50,7 +50,7 @@ module TaggTile
       g.assets          false
       g.helper          false
       g.stylesheets     false
-      g.test_framework  nil
+      g.template_engine :jbuilder
       g.test_framework :rspec,
                        :fixtures => true,
                        :view_specs => false,

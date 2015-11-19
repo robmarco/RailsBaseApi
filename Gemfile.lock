@@ -199,6 +199,3 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   sdoc (~> 0.4.0)
   spring
-
-BUNDLED WITH
-   1.10.6
