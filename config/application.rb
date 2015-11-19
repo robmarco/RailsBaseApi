@@ -23,11 +23,25 @@ module TaggTile
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'Madrid'
+
+    # Adding Lib folder
+    config.autoload_paths << "#{config.root}/lib"
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # Rack-Cors configuration
+    config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
+      allow do
+        origins '*'
+        resource '*',
+                 :headers => :any,
+                 :methods => [:get, :post, :delete, :put, :options, :head],
+                 :max_age => 0
+      end
+    end
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
@@ -35,7 +49,17 @@ module TaggTile
     config.generators do |g|
       g.assets          false
       g.helper          false
+      g.stylesheets     false
       g.test_framework  nil
+      g.test_framework :rspec,
+                       :fixtures => true,
+                       :view_specs => false,
+                       :helper_specs => false,
+                       :routing_specs => false,
+                       :controller_specs => true,
+                       :request_specs => false
+      g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
+
   end
 end
